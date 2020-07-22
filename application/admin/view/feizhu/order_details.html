@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>订单详情</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/admin/style/admin.css" media="all">
+    <style>
+        .layui-input, .layui-textarea{
+            width: 300px;
+        }
+        .layui-form-select dl{
+            min-width: 300px;
+        }
+    </style>
+</head>
+<body>
+            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+                <legend>订单详情</legend>
+            </fieldset>
+
+            <blockquote class="layui-elem-quote">
+                <ul>
+                <li>订单号：{$data.tid}</li>
+                <li>订单状态：{$data.status}</li>
+                <li>商品名称：{$data.orders.order.title}</li>
+                <li>商品标题：{$data.orders.order.sku_properties_name}</li>
+                <li>商品价格：{$data.price}</li>
+                <li>购买数量：{$data.num}</li>
+                <li>下单时间：{$data.created}</li>
+                <li>实付金额：{$data.payment}</li>
+                <li>邮费：{$data.post_fee}</li>
+                <li>实付金额：{$data.payment}</li>
+                <li>付款时间：{$data.pay_time ? $data.pay_time : ''}</li>
+                <li>交易修改时间：{$data.modified}</li>
+                <li>交易结束时间：{$data.end_time ? $data.end_time : ''}</li>
+                <li>买家昵称：{$data.buyer_nick}</li>
+                <li>买家留言：{$data.buyer_message ? $data.buyer_message : ''}</li>
+                <li>买家备注：{$data.buyer_memo ? $data.buyer_memo : ''}</li>
+                <li>实际收款：{$data.received_payment}</li>
+                <li>发货时间：{$data.consign_time  ? $data.consign_time : ''}</li>
+                </ul>
+            </blockquote>
+            <br>
+            <!-- <fieldset class="layui-elem-field">
+                <legend>买家信息</legend>
+                <div class="layui-field-box">
+                    <ul>
+                        <li>收货人姓名：{$data.receiver_name ? $data.receiver_name : ''}</li>
+                        <li>收货人电话：{$data.receiver_phone ? $data.receiver_phone :''}</li>
+                        <li>收货人手机号：{$data.receiver_mobile ? $data.receiver_mobile:''}</li>
+                        <li>收货人省份：{$data.receiver_state ? $data.receiver_state: ''}</li>
+                        <li>收货人详细地址：{$data.receiver_address ? $data.receiver_address :''}</li>
+                        <li>邮编：{$data.receiver_zip? $data.receiver_zip : ''}</li>
+                    </ul>
+                </div>
+            </fieldset> -->
+            <fieldset class="layui-elem-field">
+                <legend>邮件相关</legend>
+                <div class="layui-field-box">
+                    <ul>
+                        <li>姓名：{$data.customer_info.name ? $data.customer_info.name : ''}</li>
+                        <li>邮箱：{$data.customer_info.email ? $data.customer_info.email : ''}</li>
+                        <li>手机号：{$data.customer_info.phone ? $data.customer_info.phone : ''}</li>
+                        <li>出行日期：{$data.customer_info.begin_date ? $data.customer_info.begin_date : ''}</li>
+                    </ul>
+                </div>
+            </fieldset>
+
+            <br>
+<script src="/static/layui/layui.js"></script>
+</body>
+</html>

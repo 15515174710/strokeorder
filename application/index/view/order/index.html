@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>订单查询</title>
+    <link rel="stylesheet" href="/static/index/base/public.css">
+    <link rel="stylesheet" href="/static/index/style/css/common.css">
+    <link rel="stylesheet" href="/static/index/style/css/order/index.css">
+    <link rel="stylesheet" href="/static/index/style/css/layer.css">
+
+</head>
+<body>
+<div class="body-back">
+    <div class="title">
+        <p>订单记录</p>
+    </div>
+
+    <div class="all-status">
+        <p><span class="o_status  {if condition=" $status== 10"}status-class{/if}" order_status="10">全部</span></p>
+
+        <p><span class="o_status {if condition=" $status== 0"}status-class{/if} " order_status="0">待接单</span></p>
+
+        <p><span class="o_status {if condition=" $status== 1"}status-class{/if} " order_status="1">进行中</span></p>
+
+        <p><span class="o_status {if condition=" $status== 2"}status-class{/if}" order_status="2">待评价</span></p>
+    </div>
+    {foreach name='data' item='vo'}
+    <div id="LAY-user-table" class="order-all-info" shop_id="{$vo.bills_id}" shop_name="{$vo.bill_tittle}">
+        <div class="order-info">
+            <div class="order-num">
+                <p>订单号:<span>{$vo.order_num}</span></p>
+
+                <p class="order-status">{$status_arr[$vo.status]}</p>
+            </div>
+            {foreach name='vo.type_arr' item='v'}
+            <div class="order-name">
+                <p><span>{$v.name}</span></p>
+
+                <p class="order-price"><span>￥{$v.price}</span></p>
+            </div>
+            {/foreach}
+            <div class="order-time">
+                <p>服务时间:<span>{$vo.add_time|substr=0,10}</span></p>
+            </div>
+            <div class="order-update">
+                <p><span>{$vo.end_time}</span></p>
+
+                <div class="order-log">合计:￥{$vo.price}</div>
+            </div>
+        </div>
+        <div class="slip">
+        </div>
+    </div>
+    {/foreach}
+
+    <div style="height: 5rem ;width: 100%">
+
+    </div>
+    <div class="my_info">
+        <div class="my_but" id="introduce">
+            <img src="/static/index/style/images/text.png" alt="">
+
+            <p><span>简介</span></p>
+        </div>
+        <div class="my_but" id="all_order">
+            <img src="/static/index/style/images/order.png" alt="">
+
+            <p><span>订单</span></p>
+        </div>
+        <div class="my_but" id="shop_register">
+            <img src="/static/index/style/images/register.png" alt="">
+
+            <p><span>注册</span></p>
+        </div>
+        <div class="my_but" id="shop_info">
+            <img src="/static/index/style/images/my.png" alt="">
+
+            <p><span>我的</span></p>
+        </div>
+    </div>
+
+
+</div>
+<script src="/static/index/src/index/index.js"></script>
+<script src="/static/index/src/jquery.min.js"></script>
+<script src="/static/index/src/common/common.js"></script>
+<script src="/static/layui/layui.js"></script>
+<script>
+
+    $('.order-all-info').click(function () {
+        var shop_name = $(this).attr("shop_name");
+        var shop_id = $(this).attr("shop_id");
+        location.href = '/index/order/info?shop_id=' + shop_id + '&shop_name=' + shop_name;
+    })
+    $('.o_status').click(function () {
+        var order_status = $(this).attr("order_status");
+        location.href = '/index/order/index?status=' + order_status;
+
+
+    })
+
+
+</script>
+
+</body>
+</html>

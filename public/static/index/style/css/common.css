@@ -1,0 +1,28 @@
+.my_info {
+    width: 100%;
+    height: 3rem;
+    background-color: white;
+    position: fixed;
+    bottom: .05rem;
+    display: flex;
+}
+
+.my_but {
+    width: 25%;
+    height: 3rem;
+    display: grid;
+}
+
+.my_but img {
+    width: 2rem;
+    height: 2rem;
+    margin: 0 auto;
+}
+
+.my_but p {
+    width: 2rem;
+    height: 1rem;
+    text-align: center;
+    margin: 0 auto;
+    font-size: .8rem;
+}

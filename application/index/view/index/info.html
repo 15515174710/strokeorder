@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>我的店铺</title>
+    <link rel="stylesheet" href="/static/index/base/public.css">
+    <link rel="stylesheet" href="/static/index/style/css/common.css">
+    <link rel="stylesheet" href="/static/index/style/css/index/info.css">
+    <link rel="stylesheet" href="/static/index/style/css/layer.css">
+
+</head>
+<body>
+<div class="body-back">
+    <div class="title">
+        <p>我的店铺</p>
+    </div>
+
+    <div class="shop-all-info">
+        <div class="shop-info">
+            <div class="order-num">
+                <p>店面信息</p>
+            </div>
+            <div class="shop-name">
+                <p>店铺名称：<span>{$data.shop_name}</span></p>
+
+                <p>店铺地址：<span>{$data.site}</span></p>
+
+                <p>联系经理：<span>{$data.shop_user}</span></p>
+
+                <p>联系电话：<span>{$data.phone|substr=0,3} **** ****</span></p>
+            </div>
+        </div>
+        <div class="slip">
+            <div class="order-num">
+                <p>店铺展示</p>
+            </div>
+        </div>
+    </div>
+    <div class="my_info">
+        <div class="my_but" id="introduce">
+            <img src="/static/index/style/images/text.png" alt="">
+
+            <p><span>简介</span></p>
+        </div>
+        <div class="my_but" id="all_order">
+            <img src="/static/index/style/images/order.png" alt="">
+
+            <p><span>订单</span></p>
+        </div>
+        <div class="my_but" id="shop_register">
+            <img src="/static/index/style/images/register.png" alt="">
+
+            <p><span>注册</span></p>
+        </div>
+        <div class="my_but" id="shop_info">
+            <img src="/static/index/style/images/my.png" alt="">
+
+            <p><span>我的</span></p>
+        </div>
+    </div>
+
+</div>
+
+<script src="/static/index/src/jquery.min.js"></script>
+<script src="/static/index/src/index/layer.js"></script>
+<script src="/static/index/src/common/common.js"></script>
+<script src="/static/index/src/index/index.js"></script>
+
+</body>
+</html>

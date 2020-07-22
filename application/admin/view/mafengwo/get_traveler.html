@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>出行人信息</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/admin/style/admin.css" media="all">
+    <style>
+        .layui-input, .layui-textarea{
+            width: 300px;
+        }
+        .layui-form-select dl{
+            min-width: 300px;
+        }
+    </style>
+</head>
+<body>
+            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+                <legend>马蜂窝订单号</legend>
+                <label class="layui-form-label">{$order_id}</label>
+            </fieldset>
+            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+                <legend>出行人信息</legend>
+            </fieldset>
+            {foreach name='data' item='vo'}
+            <blockquote class="layui-elem-quote layui-quote-nm">
+                <ul>
+                    <li>出行人姓名：{$vo.name}</li>
+                    <li>护照证件号：{$vo.passport}</li>
+                    <li>证件类型：{$vo.id_type}</li>
+                    <li>港澳通行证：{$vo.laissez_passer}</li>
+                    <li>台湾通行证：{$vo.laissez_passer_tw}</li>
+                    <li>联系电话：{$vo.cellphone}</li>
+                    <li>身份证号码：{$vo.id_card}</li>
+                    <li>出行人ID：{$vo.traveler_id}</li>
+                </ul>
+            </blockquote>
+            {/foreach}
+<!--            <fieldset class="layui-elem-field">-->
+<!--                <legend>更改订单状态选项</legend>-->
+<!--                <br>-->
+<!--                <form class="layui-form" id="form1" name="form1">-->
+<!--                <div class="layui-form-item">-->
+<!--                    <label class="layui-form-label">订单状态值</label>-->
+<!--                    <div class="layui-input-block">-->
+<!--                        <select name="status" lay-filter="status">-->
+<!--                            <option value="12">已联系用户并确认库存</option>-->
+<!--                            <option value="13">已发确认单</option>-->
+<!--                        </select>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="layui-form-item">-->
+<!--                    <label class="layui-form-label">签证订单的子状态值</label>-->
+<!--                    <div class="layui-input-block">-->
+<!--                        <select name="ostatus" lay-filter="ostatus">-->
+<!--                            <option value="0">默认</option>-->
+<!--                            <option value="1">已快递</option>-->
+<!--                            <option value="2">已自取</option>-->
+<!--                            <option value="3">已发邮件</option>-->
+<!--                            <option value="4">已完成预约</option>-->
+<!--                            <option value="5">已拒签</option>-->
+<!--                        </select>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                    <div style="margin-left: 20px">-->
+<!--                        <button type="button" class="layui-btn">确认更改</button>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </fieldset>-->
+<script src="/static/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: '/static/admin/'
+    }).use(['table','form'], function(){
+        var $ = layui.$
+            ,form = layui.form
+            ,table = layui.table;
+        $('.layui-btn').on('click', function(){
+             var order_id = $("#oid").val();
+             var status = $("select[name='status'] option:selected").val();
+             var ostatus = $("select[name='ostatus'] option:selected").val();
+            $.ajax({
+                url:"/admin/mafengwo/updateOrderState",
+                data:{'order_id':order_id,'status':status,'ostatus':ostatus},
+                type:"Post",
+                dataType:"json",
+                success:function(data){
+                    if (data.code == '1'){
+                        layer.alert('修改订单状态成功');
+                    }else {
+                        layer.alert('修改订单状态失败');
+                    }
+                    // location.reload(); //删除成功后再刷新
+                }
+        });
+    });
+ });
+</script>
+</body>
+</html>

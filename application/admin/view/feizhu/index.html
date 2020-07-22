@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>所有订单</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/admin/style/admin.css" media="all">
+</head>
+<body>
+
+<div class="layui-fluid">
+    <div class="layui-card">
+        <div class="layui-form layui-card-header layuiadmin-card-header-auto">
+            <div class="layui-form-item">               
+                <div class="layui-inline">
+                    <label class="layui-form-label">起始时间：</label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input" id="begin" name="begin">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">截止时间：</label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input" id="end_time" name="end_time">
+                    </div>
+                </div>
+
+                <div class="layui-inline">
+                    <select name="status" lay-filter="" lay-verify="">
+                        <option value="">订单状态</option>
+                        <option value="WAIT_BUYER_PAY">等待买家付款</option>
+                        <option value="WAIT_SELLER_SEND_GOODS">等待卖家发货</option>
+                        <option value="SELLER_CONSIGNED_PART">卖家部分发货</option>
+                        <option value="WAIT_BUYER_CONFIRM_GOODS">等待买家确认收货</option>
+                        <option value="TRADE_BUYER_SIGNED">买家已签收（货到付款专用）</option>
+                        <option value="TRADE_FINISHED">交易成功</option>
+                        <option value="TRADE_CLOSED">交易关闭</option>
+                        <option value="TRADE_CLOSED_BY_TAOBAO">交易被淘宝关闭</option>
+                        <option value="TRADE_NO_CREATE_PAY">没有创建外部交易</option>
+                        <option value="WAIT_PRE_AUTH_CONFIRM">余额宝0元购合约中</option>
+                        <option value="PAY_PENDING">外卡支付付款确认中</option>
+                        <option value="ALL_WAIT_PAY">所有买家未付款的交易</option>
+                        <option value="ALL_CLOSED">所有关闭的交易</option>
+                        <option value="PAID_FORBID_CONSIGN">该状态代表订单已付款但是处于禁止发货状态</option>
+                    </select>
+                </div>
+
+                <div class="layui-inline">
+                    <button class="layui-btn layuiadmin-btn-bills" lay-submit lay-filter="LAY-user-back-search">
+                        <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-card-body">                 
+            <table id="LAY-user-table" lay-filter="LAY-user-table"></table>
+            <script type="text/html" id="buttonTpl">
+                <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="detail"></i>进入详情</a>
+                <!-- <a class="layui-btn layui-btn-xs" lay-event="remark"></i>点击发货</a> -->
+            </script>
+        </div>
+    </div>
+</div>
+
+<script src="/static/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: '/static/admin/' //静态资源所在路径
+    }).use(['jquery','table','element'], function(){
+        var $ = layui.$
+            ,form = layui.form
+            ,table = layui.table;
+
+        var active = {
+
+        };
+
+        $('.layui-btn.layuiadmin-btn-admin').on('click', function(){
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+        // 监听搜索
+        form.on('submit(LAY-user-back-search)', function(data){
+            var field = data.field;
+
+            // 执行重载
+            table.reload('LAY-user-table', {
+                where: field
+            });
+        });
+
+    });
+
+    renderTable();
+    // 渲染表格
+    function renderTable() {
+
+        layui.use(['table', 'form'], function () {
+            var $ = layui.$
+                ,form = layui.form
+                ,table = layui.table;
+
+            table.render({
+                elem: "#LAY-user-table",
+                url: "/admin/feizhu/getorderlist",
+                cols: [
+                    [{
+                        field: "tid",
+                        width: "300",
+                        align: "center",
+                        title: "订单号"
+                    }, 
+                    {
+                        field: "goods_name",
+                        width: "750",
+                        align: "center",
+                        title: "商品名称",
+                    },
+                    {
+                        field: "price",
+                        width: "150",
+                        align: "center",
+                        title: "价格",
+                    },
+                    {
+                        field: "num",
+                        width: "100",
+                        align: "center",
+                        title: "数量",
+                    },
+                    {
+                        field: "status",
+                        width: "200",
+                        align: "center",
+                        title: "订单状态",
+                    },
+                    {
+                        title: "订单操作",
+                        align: "center",
+                        width: "auto",
+                        fixed: "right",
+                        templet: '#buttonTpl',
+                        toolbar: '#buttonTpl'
+                    }]
+                ],
+                page: !0,
+                limit: 20,
+                height: "full-50",
+                text: "对不起，加载出现异常！"
+            });
+        });
+
+
+        layui.use('laydate', function(){
+          var laydate = layui.laydate;
+          
+          //执行一个laydate实例
+          laydate.render({
+            elem: '#begin' //指定元素
+          });
+        });
+
+
+        layui.use('laydate', function(){
+          var laydate = layui.laydate;
+          
+          //执行一个laydate实例
+          laydate.render({
+            elem: '#end_time' //指定元素
+          });
+        });
+
+
+
+        layui.use(['table', 'layer'], function () {
+
+            let layer = layui.layer;
+            let table = layui.table;
+
+            table.on("tool(LAY-user-table)", function(e) {
+                if ("detail" === e.event) {
+                    layer.open({
+                        title :'订单详情',
+                        type: 2,
+                        area: ['1000px', '700px'],
+                        fixed: false, //不固定
+                        maxmin: true,
+                        content: '/admin/feizhu/orderDetails?tid=' + e.data.tid,
+                    });
+                }
+                if ("reviews" === e.event) {
+                    layer.open({
+                        title :'买家信息',
+                        type: 2,
+                        area: ['1000px', '700px'],
+                        fixed: false, //不固定
+                        maxmin: true,
+                        content: '/admin/mafengwo/getReviews',
+                    });
+                }
+            });
+        });
+    }
+</script>
+</body>
+</html>

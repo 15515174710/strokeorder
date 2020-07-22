@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>订单备注信息</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/admin/style/admin.css" media="all">
+    <style>
+        .layui-input{
+            width: 400px;
+        }
+    </style>
+</head>
+<body>
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+    <legend>马蜂窝订单号</legend>
+    <label class="layui-form-label">{$order_id}</label>
+</fieldset>
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+    <legend>备注信息</legend>
+</fieldset>
+{empty name="data"}
+<blockquote class="layui-elem-quote layui-quote-nm">改订单暂无备注信息</blockquote>
+{else /}
+{foreach name='data' item='vo'}
+<blockquote class="layui-elem-quote layui-quote-nm">
+    <ul>
+        <li>备注id：{$vo.id}</li>
+        <li>备注添加人UID：{$vo.admin_uid}</li>
+        <li>备注内容：{$vo.content}</li>
+        <li>备注时间：{$vo.ctime}</li>
+    </ul>
+</blockquote>
+{/foreach}
+{/empty}
+            <fieldset class="layui-elem-field">
+                <legend>添加订单备注</legend>
+                <br>
+                <form class="layui-form" id="form1" name="form1">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">备注输入框</label>
+                        <div class="layui-input-block">
+                            <input id="memo" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请添加备注" class="layui-input">
+                        </div>
+                    </div>
+                    <div style="margin-left: 20px">
+                        <button type="button" class="layui-btn">确认添加</button>
+                    </div>
+                </form>
+            </fieldset>
+<script src="/static/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: '/static/admin/'
+    }).use(['table','form'], function(){
+        var $ = layui.$
+            ,form = layui.form
+            ,table = layui.table;
+        $('.layui-btn').on('click', function(){
+            var order_id = $("#oid").val();
+            var memo = $("#memo").val();
+            $.ajax({
+                url:"/admin/mafengwo/updateOrderState",
+                data:{'order_id':order_id,'memo':memo},
+                type:"Post",
+                dataType:"json",
+                success:function(data){
+                    if (data.code == '1'){
+                        layer.alert('添加订单备注成功');
+                    }else {
+                        layer.alert('添加订单备注失败');
+                    }
+                    // location.reload();
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+body {
+    width: 100%;
+    height: 100%;
+}
+
+.body-back {
+    width: 100%;
+    height: 100%;
+    /*background-color: rgba(242,242,242);*/
+}
+
+.title {
+    width: 100%;
+    height: 3rem;
+    background-color: rgba(252, 157, 39);
+    line-height: 3rem;
+    text-align: center;
+}
+
+.title p {
+    color: white;
+}
+
+.all-status {
+    width: 100%;
+    height: 3.5rem;
+    background-color: rgba(242, 242, 242);
+    display: flex;
+}
+
+.all-status p {
+    width: 25%;
+    height: 3.5rem;
+    line-height: 3.5rem;
+    text-align: center;
+    color: rgba(175, 175, 175);
+}
+
+.status-class {
+    color: rgba(252, 157, 39);
+    border-bottom: 2px solid rgba(252, 157, 39);
+}
+.order-all-info{
+    width: 100%;
+    /*height: 10rem;*/
+}
+.shop-all-info{
+    width: 100%;
+    height: 15rem;
+}
+.order-info {
+    width: 100%;
+    /*height: 10rem;*/
+}
+.shop-info {
+    width: 100%;
+    height: 15rem;
+}
+
+.order-num {
+    width: 90%;
+    height: 2.5rem;
+    margin-left: 5%;
+    border-bottom: 1px solid rgba(242, 242, 242);
+    line-height: 2.5rem;
+    display: flex;
+}
+
+.order-status {
+    margin-left: auto;
+}
+
+.order-name {
+    width: 90%;
+    height: 2.5rem;
+    margin-left: 5%;
+    line-height: 2.5rem;
+    display: flex;
+}
+
+.order-price {
+    margin-left: auto;
+}
+
+.order-price span {
+    color: rgba(252, 157, 39);
+}
+
+.order-time {
+    width: 90%;
+    height: 2.5rem;
+    margin-left: 5%;
+    line-height: 2.5rem;
+    display: flex;
+    border-bottom: 1px solid rgba(242, 242, 242);
+}
+
+.order-update {
+    width: 90%;
+    height: 2.5rem;
+    margin-left: 5%;
+    line-height: 2.5rem;
+    display: flex;
+}
+
+.order-update p {
+    color: rgba(175, 175, 175);
+    font-size: .8rem;
+}
+
+.order-log {
+    margin-left: auto;
+    width: 6rem;
+    height: 2rem;
+    line-height: 2rem;
+    text-align: center;
+    margin-top: .2rem;
+}
+
+.slip {
+    width: 100%;
+    height: .5rem;
+    background-color: rgba(242, 242, 242);
+}
+
+
+.shop-name {
+    width: 90%;
+    height: 6.5rem;
+    margin-left: 5%;
+    line-height: 2.5rem;
+}
+.shop-name p{
+    width: 100%;
+    height: 1.8rem;
+    line-height: 1.8rem;
+    font-size: .8rem;
+
+}
+
+
+

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>登录</title>
+    <link rel="stylesheet" href="/static/index/base/public.css">
+    <link rel="stylesheet" href="/static/index/style/css/login/login.css">
+    <link rel="stylesheet" href="/static/index/style/css/layer.css">
+    <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+
+
+</head>
+<body>
+<div class="body-back">
+
+    <div class="logo">
+        <img src="/static/index/style/images/logo1.png" alt="">
+
+        <p class="company_name">富华清洁</p>
+
+        <p class="company_eg">H F Q J F W</p>
+    </div>
+    <form class="layui-form" action="" lay-filter="component-form-element">
+
+        <div class="layui-col-lg6 login_info">
+            <input type="text" name="phone" lay-verify="required" placeholder="请输入手机号"
+                   style="width: 18rem; BACKGROUND-COLOR: transparent;"
+                   autocomplete="off" class="layui-input">
+        </div>
+        <div class="layui-col-lg6 login_info">
+            <input type="password" name="password" lay-verify="required" placeholder="请输入密码"
+                   style="width: 18rem; BACKGROUND-COLOR: transparent;"
+                   autocomplete="off" class="layui-input">
+        </div>
+        <div lay-filter="LAY-user-login-submit" lay-submit class="button_form login_info">
+            <span>登录</span>
+        </div>
+        <div class="register">
+            <span><a href="/index/login/register">还没账号？立即注册</a></span>
+        </div>
+
+        <div class="company">
+            <span>@to 河南富华清洁服务有限公司 </span>
+        </div>
+    </form>
+
+</div>
+
+<script src="/static/index/src/jquery.min.js"></script>
+<script src="/static/index/src/common/common.js"></script>
+<script src="/static/index/src/index/index.js"></script>
+<script src="/static/layui/layui.js"></script>
+
+<script>
+    layui.config({
+        base: '/static/admin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['form'], function () {
+        var $ = layui.$
+                , form = layui.form
+                , router = layui.router()
+                , search = router.search;
+
+        form.render();
+
+        form.on('submit(LAY-user-login-submit)', function (obj) {
+
+            $.post('{:url("index/login/doLogin")}', obj.field, function (res) {
+                if (0 == res.code) {
+
+                    // 登入成功的提示与跳转
+                    layer.msg('登入成功', {
+                        offset: '15px'
+                        , icon: 1
+                        , time: 1000
+                    }, function () {
+                        location.href = res.data; //后台主页
+                    });
+                } else {
+
+                    layer.msg(res.msg, {anim: 6});
+                    $("#captcha").click();
+                }
+            }, 'json');
+        });
+    });
+</script>
+</body>
+</html>
