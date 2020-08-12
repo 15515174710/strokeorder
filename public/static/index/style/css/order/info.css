@@ -40,18 +40,22 @@ body {
     color: rgba(252, 157, 39);
     border-bottom: 2px solid rgba(252, 157, 39);
 }
-.order-all-info{
+
+.order-all-info {
     width: 100%;
     /*height: 10rem;*/
 }
-.shop-all-info{
+
+.shop-all-info {
     width: 100%;
     height: 15rem;
 }
+
 .order-info {
     width: 100%;
     /*height: 10rem;*/
 }
+
 .shop-info {
     width: 100%;
     height: 15rem;
@@ -123,28 +127,31 @@ body {
     background-color: rgba(242, 242, 242);
 }
 
-
 .shop-name {
     width: 90%;
     height: 6.5rem;
     margin-left: 5%;
     line-height: 2.5rem;
 }
-.shop-name p{
+
+.shop-name p {
     width: 100%;
     height: 1.8rem;
     line-height: 1.8rem;
     font-size: .8rem;
 
 }
-.img_all{
+
+.img_all {
     width: 100%;
     margin-top: 1.5rem;
     display: grid;
+    margin-bottom: 4.5rem;
 }
 
-.img_all img{
-    width: 70%;
+.img_all img {
+    width: 300px;
+    height: 300px;
     margin: 0 auto;
 
 }
