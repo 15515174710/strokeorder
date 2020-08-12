@@ -53,10 +53,15 @@ class Order extends Controller
         $info = $order->getInfo($shop_id);
 
         $info['type_arr'] = $get_type->getTypeList($info['type']);
+        $info['bill_url'] = explode('|', $info['bill_url']);
+        foreach ($info['bill_url'] as &$v) {
+            $v = 'http://' . $_SERVER['HTTP_HOST'] . $v;
+        }
         $info['price'] = array_sum(array_column($info['type_arr'], 'price'));
         $status_arr = ['待接单', '进行中', '待评价', '已评价'];
         $this->assign('status_arr', $status_arr);
         $this->assign('data', $info);
+        $this->assign('bill_url', $info['bill_url']);
         return $this->fetch();
     }
 }

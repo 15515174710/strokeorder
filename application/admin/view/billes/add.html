@@ -23,7 +23,7 @@
                                 <label class="layui-form-label">选择饭店：</label>
 
                                 <div class="layui-input-block">
-                                    <select name="shop_id" lay-filter="shop_select" lay-verify="required">
+                                    <select name="shop_id" lay-filter="shop_select" >
                                         <option value="">请选择饭店</option>
                                         {foreach name='shop_list' item='v'}
                                         <option value="{$v.id}">{$v.shop_name}</option>

@@ -44,3 +44,25 @@ https://www.kancloud.cn/nickbai/whisper-v2/988777
 ![支付宝](https://images.gitee.com/uploads/images/2019/1012/215507_3f9aebe2_552304.png)  
 微信
 ![微信](https://images.gitee.com/uploads/images/2019/1012/215507_3e868b0e_552304.png) 
+
+
+server {
+        listen        8888;
+        server_name localhost;
+        root   /mnt/strokeorder/public;
+        index  index.php index.html index.htm;
+        location / {
+             if (!-e $request_filename) {
+                rewrite  ^(.*)$  /index.php?s=/$1  last;
+                 }
+
+        }
+        location ~ \.php(.*)$ {
+            root   /mnt/strokeorder/public;
+            fastcgi_pass   127.0.0.1:9000;
+            fastcgi_index  index.php;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            include        fastcgi_params;
+
+        }
+}

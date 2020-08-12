@@ -45,4 +45,21 @@ class Shop extends Model
         return $this->where($where)->select()->toArray();
 
     }
+
+    public function getList($limit, $where)
+    {
+        $prefix = config('database.prefix');
+
+        try {
+
+            $res = $this->field($prefix . 'bills.*')->where($where)->order('bills_id', 'desc')->paginate($limit);
+
+        }catch (\Exception $e) {
+
+            return modelReMsg(-1, '', $e->getMessage());
+        }
+
+        return modelReMsg(0, $res, 'ok');
+    }
+
 }

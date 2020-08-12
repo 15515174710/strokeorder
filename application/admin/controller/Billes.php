@@ -162,7 +162,12 @@ class Billes extends Base
         $get_type = new Type();
         $type_list = $get_type->getTypeList($bills['type']);
         $bills['type_arr'] = implode(',', array_column($type_list, 'name'));
-        $bills['bill_url'] = 'http://' . $_SERVER['HTTP_HOST'] . $bills['bill_url'];
+        $bills['bill_url'] = explode('|', $bills['bill_url']);
+        foreach ($bills['bill_url'] as &$v) {
+            $v = 'http://' . $_SERVER['HTTP_HOST'] . $v;
+        }
+        $this->assign('bill_url', $bills['bill_url']);
+
         $this->assign('data', $bills);
         return $this->fetch();
     }

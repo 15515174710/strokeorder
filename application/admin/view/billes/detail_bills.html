@@ -43,7 +43,10 @@
 <fieldset class="layui-elem-field">
     <legend>图片预览</legend>
     <div class="layui-field-box">
-        <img style="width:400px; height: 400px;" src="{$data.bill_url}">
+        {foreach name='bill_url' item='v'}
+        <img style="width:400px; height: 400px;" src="{$v}">
+
+        {/foreach}
     </div>
 </fieldset>
 

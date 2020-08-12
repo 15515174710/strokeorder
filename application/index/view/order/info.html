@@ -37,12 +37,13 @@
             <div class="order-update">
                 <p><span>{$data.end_time}</span></p>
 
-                <div class="order-log"> <span>合计:￥{$data.price}</span></div>
+                <div class="order-log"><span>合计:￥{$data.price}</span></div>
             </div>
         </div>
         <div class="slip">
         </div>
     </div>
+
 
     <div class="shop-all-info">
         <div class="shop-info">
@@ -69,21 +70,34 @@
         <div class="slip">
         </div>
     </div>
+    <div class="img_all">
+        <div class="order-num">
+            <p>清洗记录</p>
+        </div>
+        {foreach name='bill_url' item='v'}
+        <img src="{$v}" alt="">
+        {/foreach}
+
+    </div>
     <div class="my_info">
         <div class="my_but" id="introduce">
             <img src="/static/index/style/images/text.png" alt="">
+
             <p><span>简介</span></p>
         </div>
         <div class="my_but" id="all_order">
             <img src="/static/index/style/images/order.png" alt="">
+
             <p><span>订单</span></p>
         </div>
         <div class="my_but" id="shop_register">
             <img src="/static/index/style/images/register.png" alt="">
+
             <p><span>注册</span></p>
         </div>
         <div class="my_but" id="shop_info">
             <img src="/static/index/style/images/my.png" alt="">
+
             <p><span>我的</span></p>
         </div>
     </div>
