@@ -16,19 +16,14 @@
     <div class="layui-card">
         <div class="layui-form layui-card-header layuiadmin-card-header-auto">
             <div class="layui-form-item">
-                <div class="layui-inline">
-                    <label class="layui-form-label">饭店名称</label>
+                <!--<div class="layui-inline">-->
+                    <!--<label class="layui-form-label">饭店名称</label>-->
 
-                    <div class="layui-input-block">
-                        <input type="text" name="bill_tittle" placeholder="请输入" autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-inline">
-                    <label class="layui-form-label">订单号</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="order_num" placeholder="请输入" autocomplete="off" class="layui-input">
-                    </div>
-                </div>
+                    <!--<div class="layui-input-block">-->
+                        <!--<input type="text" name="bill_tittle" placeholder="请输入" autocomplete="off" class="layui-input">-->
+                    <!--</div>-->
+                <!--</div>-->
+
                 <!--<div class="layui-inline">-->
                 <!--<select name="type" lay-filter="" lay-verify="">-->
                 <!--<option value="">服务类型</option>-->
@@ -39,14 +34,7 @@
                 <!--</select>-->
                 <!--</div>-->
 
-                <div class="layui-inline">
-                    <select name="status" lay-filter="" lay-verify="">
-                        <option value="">订单状态</option>
-                        <option value=0>待接单</option>
-                        <option value=1>进行中</option>
-                        <option value=2>待评价</option>
-                    </select>
-                </div>
+
                 <div class="layui-inline">
                     <button class="layui-btn layuiadmin-btn-bills" lay-submit lay-filter="LAY-user-back-search">
                         <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
@@ -114,15 +102,12 @@
     renderTable();
     // 渲染表格
     function renderTable() {
-        layTool.table("#LAY-user-table", "/admin/billes/index", [
+        layTool.table("#LAY-user-table", "/admin/reviews/index", [
             [{
-                field: "bills_id",
-                title: "订单ID"
-            }, {
-                field: "order_num",
-                title: "订单编号", align: 'center', width: 250
-            }, {
-                field: "bill_tittle",
+                field: "id",
+                title: "饭店编号", width: 100
+            },  {
+                field: "shop_name",
                 title: "饭店名称", align: 'center', width: 200
             }, {
                 field: "shop_user",
@@ -132,37 +117,14 @@
                 title: "联系电话", align: 'center', width: 130
             }, {
                 field: "site",
-                title: "地址", align: 'center', width: 250
+                title: "地址", align: 'center'
             },
-                {
-                    field: 'status', title: '订单状态', align: 'center', width: 100, templet: function (d) {
-                    if (d.status == 1) {
-                        return '待接单';
-                    } else if (d.status == 2) {
-                        return '进行中';
-                    } else if (d.status == 3) {
-                        return '待评价';
-                    }
-                }
-                },
-                {
-                    field: 'type_arr',
-                    title: '服务类型',  align: 'center', width: 250
-                }, {
-                field: "price",
-                title: "总价格", align: 'center', width: 100
-            }, {
-                field: "add_time",
-                title: "下单时间", align: 'center', width: 200
-            }, {
-                field: "bill_marks",
-                title: "备注",
-            },
-                {
-                    title: "操作", align: 'center', width: 250,
-                    align: "center",
-                    templet: '#buttonTpl'
-                }]
+//                {
+//                    title: "操作", align: 'center', width: 250,
+//                    align: "center",
+//                    templet: '#buttonTpl'
+//                }
+            ]
         ]);
 
         layui.use(['table', 'layer'], function () {

@@ -49,12 +49,12 @@ class Shop extends Model
     public function getList($limit, $where)
     {
         $prefix = config('database.prefix');
-
         try {
 
-            $res = $this->field($prefix . 'bills.*')->where($where)->order('bills_id', 'desc')->paginate($limit);
+            $res = $this->field($prefix . 'shop.*')->where($where)->order('id', 'desc')->paginate($limit);
 
-        }catch (\Exception $e) {
+
+        } catch (\Exception $e) {
 
             return modelReMsg(-1, '', $e->getMessage());
         }
